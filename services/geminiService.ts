@@ -1,11 +1,13 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable not set");
+// This is the correct way to get the API key in a Vite project
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+    throw new Error("VITE_GEMINI_API_KEY environment variable not set");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -54,8 +56,8 @@ export const generateVideo = async (userPrompt: string, onProgress: (message: st
 
   onProgress("Downloading generated video...");
 
-  // The download link requires the API key to be appended
-  const response = await fetch(`${downloadLink}&key=${process.env.API_KEY}`);
+  // This now correctly uses the apiKey variable
+  const response = await fetch(`${downloadLink}&key=${apiKey}`);
   if (!response.ok) {
     throw new Error(`Failed to download video file. Status: ${response.status}`);
   }
