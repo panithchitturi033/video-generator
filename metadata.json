@@ -1,0 +1,5 @@
+{
+  "name": "Vidify AI",
+  "description": "An AI-powered text-to-video generator that transforms your prompts into stunning short videos, centered around an interactive 3D 'Creation Orb'.",
+  "requestFramePermissions": []
+}
